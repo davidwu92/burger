@@ -7,6 +7,7 @@ module.exports = require('mysql2').createConnection({
   database: 'burgers_db'
 })
 
+//~~~~HOW IT LOOKED BEFORE~~~~~~
 // const mysql = require('mysql2')
 
 // const db = mysql.createConnection({
