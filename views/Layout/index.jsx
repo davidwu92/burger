@@ -13,8 +13,12 @@ module.exports = props => {
       <title>Document</title>
     </head>
     <body>
-      {/* The PROPS dumped in <Layout> are called here*/}
+      {/* The PROPS dumped in <Layout> are brought in here*/}
      {props.children} 
+     {/* I need the axios CDN here so I can use axios */}
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {/* Relative to this upon loading, all the folders and files exist together. */}
+    <script src="./app.js"></script>
     </body>
     </html>
   )

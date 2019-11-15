@@ -20,35 +20,35 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
 
-//ROUTES (not moved to routes folder yet)
-app.get('/', (req, res)=>{
-  res.render('index')
-})
-
-//SHOW (get) burgers
-app.get('/burgers', (req, res)=>{
-  db.query(`SELECT * FROM burgers`, (e, burgers)=>{
-    if (e) console.log(e)
-    res.json(burgers) //this is the method for sending data to the front end.
+  //ROUTES (not moved to routes folder yet)
+  app.get('/', (req, res)=>{
+    res.render('index') //Here's where we said to render views/index.jsx
   })
-})
 
-//CREATE (post) a burger
-//We probably don't need to pass in whether or not it's been eaten (keep default FALSE).
-app.post('/burgers', (req, res)=>{
-  db.query(`INSERT INTO burgers (name, eaten) VALUES ('${req.body.name}', ${req.body.eaten})`, e=>{
-    if (e) {console.log(e)}
-    res.sendStatus(200) 
+  //SHOW (get) burgers
+  app.get('/burgers', (req, res)=>{
+    db.query(`SELECT * FROM burgers`, (e, burgers)=>{
+      if (e) console.log(e)
+      res.json(burgers) //this is the method for sending data to the front end.
+    })
   })
-})
 
-//Toggle "eaten" (put)
-app.put('/burgers/:id', (req, res)=>{
-  db.query(`UPDATE burgers SET eaten = ${req.body.eaten} WHERE id = ${parseInt(req.params.id)}`, e=>{
-    if (e) {console.log(e)}
-    res.sendStatus(200)
+  //CREATE (post) a burger
+  //We probably don't need to pass in whether or not it's been eaten (keep default FALSE).
+  app.post('/burgers', (req, res)=>{
+    db.query(`INSERT INTO burgers (name, eaten) VALUES ('${req.body.name}', ${req.body.eaten})`, e=>{
+      if (e) {console.log(e)}
+      res.sendStatus(200) 
+    })
   })
-})
+
+  //Toggle "eaten" (put)
+  app.put('/burgers/:id', (req, res)=>{
+    db.query(`UPDATE burgers SET eaten = ${req.body.eaten} WHERE id = ${parseInt(req.params.id)}`, e=>{
+      if (e) {console.log(e)}
+      res.sendStatus(200)
+    })
+  })
 
 
 //still need heroku.
